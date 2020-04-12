@@ -1,8 +1,10 @@
 import React, { useRef, useEffect } from 'react';
-import { editor } from "monaco-editor";
+import { editor, KeyMod, KeyCode  } from "monaco-editor";
 import { debounce } from 'lodash';
+import message from 'antd/lib/message';
+import 'antd/lib/message/style/index.css';
 
-
+message.config({ top: 20, duration: 2, maxCount: 1 });
 
 function Editor(props) {
   const container = useRef(null);
@@ -31,6 +33,11 @@ function Editor(props) {
     _model.onDidChangeContent(debounce(() => {
       onChange(_model.getValue());
     }, 500));
+    _editor.addCommand(KeyMod.CtrlCmd | KeyCode.KEY_S, saveCache);
+    function saveCache() {
+      window.localStorage.setItem('cached', _model.getValue());
+      message.info('Saved');
+    }
   }, [value, onChange])
   return (
     <div className="editor" ref={container} />
