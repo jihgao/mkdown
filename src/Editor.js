@@ -38,6 +38,15 @@ function Editor(props) {
       window.localStorage.setItem('cached', _model.getValue());
       message.info('Saved');
     }
+    function handleMessage(evt) {
+      if (evt.data.id === 'menu.save') {
+        saveCache();
+      }
+    }
+    window.addEventListener('message', handleMessage);
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
   }, [value, onChange])
   return (
     <div className="editor" ref={container} />

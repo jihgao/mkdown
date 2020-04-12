@@ -32,6 +32,46 @@ html,body,
   overflow: visible;
 }
 
+.menu{
+  height: var(--menu-height);
+  background: #232323;
+  box-sizing: border-box;
+  border-bottom: 1px solid #2E2E2E;
+  color: #858585;
+  font-size: 12px;
+  line-height: var(--menu-height);
+  padding: 0 16px;
+  overflow: visible;
+}
+.ant-dropdown-menu{
+  background: #232323!important;
+}
+.ant-dropdown-menu-item.ant-dropdown-menu-item, 
+.ant-dropdown-menu-submenu-title.ant-dropdown-menu-submenu-title{
+  padding-top:0;
+  padding-bottom:0;
+}
+.ant-dropdown-menu-item.ant-dropdown-menu-item:hover, 
+.ant-dropdown-menu-submenu-title.ant-dropdown-menu-submenu-title:hover{
+  background: transparent;
+}
+.menu-file__overlay{
+  position: absolute;
+  z-index: 999;
+  opacity: 1!important;
+  width: 100px;
+}
+.o-menu-title,
+.menu-file__overlay a{
+  color: #858585;
+  text-decoration:none;
+  cursor: pointer;
+}
+.menu-file__overlay a:hover,
+.o-menu-title:hover{
+  color:#e8e7e7;
+  text-decoration:none;
+}
 .editor{
   box-sizing: border-box;
   flex: 1;
