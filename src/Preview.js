@@ -3,6 +3,9 @@ import MarkdownIt from "markdown-it";
 import tocPlugin from "markdown-it-table-of-contents";
 import "./mathjax";
 import "mathjax/es5/tex-svg";
+import mermaid from "mermaid";
+
+mermaid.initialize({ startOnLoad: true });
 
 const md = new MarkdownIt({
   html: false,
@@ -20,6 +23,12 @@ function Preview(props) {
   const [init, setInit] = useState(null);
   const { source } = props;
   const ele = useRef(null);
+  let offcanvas = document.querySelector('#offcanvas');
+  if (!offcanvas){
+    offcanvas = document.createElement('div');
+    offcanvas.setAttribute('id', 'offcanvas');
+    document.body.appendChild(offcanvas);
+  }
   useEffect(() => {
     if (!init) {
       window.MathJax.startup.elements = ele.current;
@@ -27,6 +36,16 @@ function Preview(props) {
       setInit(true);
     }
     ele.current.innerHTML = md.render(source || "");
+    ele.current.querySelectorAll(".language-flow").forEach(($el, idx) => {
+      mermaid.mermaidAPI.render(
+        `chart-${idx}`,
+        $el.textContent,
+        (svgCode) => {
+          $el.innerHTML = svgCode;
+        },
+        offcanvas
+      );
+    });
     window.MathJax.typeset();
   }, [source, init]);
   return (
