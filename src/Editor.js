@@ -44,8 +44,13 @@ function Editor(props) {
       }
     }
     window.addEventListener('message', handleMessage);
+    function handleResize() {
+      _editor.layout(container.current.getBoundingClientRect())
+    }
+    window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('message', handleMessage);
+      window.removeEventListener('resize', handleResize);
     };
   }, [value, onChange])
   return (
