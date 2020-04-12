@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Preview from "./Preview";
 import Editor from "./Editor";
+import example from "./example";
 
 function Main() {
-  const [source, setSource] = useState(window.localStorage.getItem('cached') || '');
+  const [source, setSource] = useState(example);
   function handleSourceChange(newSource) {
     setSource(newSource);
   }

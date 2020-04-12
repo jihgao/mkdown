@@ -67,6 +67,9 @@ html,body,
   text-decoration:none;
   cursor: pointer;
 }
+.o-menu-title + .o-menu-title{
+  margin-left: 1rem;
+}
 .menu-file__overlay a:hover,
 .o-menu-title:hover{
   color:#e8e7e7;
@@ -86,9 +89,24 @@ html,body,
   height: 100%;
   margin: 0;
   overflow: auto;
-  padding: 0;
+  padding: 2rem;
 }
 
 .preview mjx-container[jax="SVG"][display="true"]{
   display: inline-block;
+}
+
+@media print {
+  html{
+     --menu-height: 0px;
+  }
+  .editor, .menu,.menu-file__overlay, .preview__pdf-btn{
+    display: none!important;
+  }
+  html, body, #root,
+  .main, .preview{
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
 }

@@ -4,8 +4,15 @@ import tocPlugin from "markdown-it-table-of-contents";
 import "./mathjax";
 import "mathjax/es5/tex-svg";
 import mermaid from "mermaid";
+import { debounce } from 'lodash';
 
 mermaid.initialize({ startOnLoad: true });
+
+const handleMessage = debounce((evt) => {
+  if (evt.data.id === 'menu.saveAs') {
+    window.print();
+  }
+}, 500);
 
 const md = new MarkdownIt({
   html: false,
@@ -36,20 +43,25 @@ function Preview(props) {
       setInit(true);
     }
     try {
-    ele.current.innerHTML = md.render(source || "");
-    ele.current.querySelectorAll(".language-flow").forEach(($el, idx) => {
-      mermaid.mermaidAPI.render(
-        `chart-${idx}`,
-        $el.textContent,
-        (svgCode) => {
-          $el.innerHTML = svgCode;
-        },
-        offcanvas
-      );
-    });
-    window.MathJax.typeset();
-  }catch(error){}
-  }, [source, init]);
+      ele.current.innerHTML = md.render(source || "");
+      ele.current.querySelectorAll(".language-flow").forEach(($el, idx) => {
+        mermaid.mermaidAPI.render(
+          `chart-${idx}`,
+          $el.textContent,
+          (svgCode) => {
+            $el.innerHTML = svgCode;
+          },
+          offcanvas
+        );
+      });
+      window.MathJax.typeset();
+    } catch (error) {}
+
+    window.addEventListener("message", handleMessage);
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, [source, init, offcanvas]);
   return (
     <div className="preview" ref={ele}/>
   );

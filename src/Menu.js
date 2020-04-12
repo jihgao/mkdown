@@ -13,6 +13,9 @@ function runCMD(eventId) {
 function Menu() {
   const menu = (
     <AntdMenu>
+      <AntdMenu.Item key="0">
+        <a href="javascript:void(0)" onClick={(e) => e.preventDefault() || runCMD('menu.saveAs')}>Print</a>
+      </AntdMenu.Item>
       <AntdMenu.Item key="1">
         <a href="javascript:void(0)" onClick={(e) => e.preventDefault() || runCMD('menu.save')}>Save</a>
       </AntdMenu.Item>
@@ -20,6 +23,7 @@ function Menu() {
   );
   return (
     <div className="menu">
+      <a className="o-menu-title" href="https://www.moki-life.com">Home</a>
       <Dropdown overlay={menu} trigger={['click']} overlayClassName="menu-file__overlay">
         <a href="javascript:void(0)" className="ant-dropdown-link o-menu-title" onClick={e => e.preventDefault()}>
           File
