@@ -35,6 +35,7 @@ function Preview(props) {
       window.MathJax.startup.getComponents();
       setInit(true);
     }
+    try {
     ele.current.innerHTML = md.render(source || "");
     ele.current.querySelectorAll(".language-flow").forEach(($el, idx) => {
       mermaid.mermaidAPI.render(
@@ -47,6 +48,7 @@ function Preview(props) {
       );
     });
     window.MathJax.typeset();
+  }catch(error){}
   }, [source, init]);
   return (
     <div className="preview" ref={ele}/>
