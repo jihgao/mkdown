@@ -13,7 +13,7 @@
     "mathjax": "3",
     "mermaid": "^8.5.0",
     "monaco-editor": "^0.20.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
