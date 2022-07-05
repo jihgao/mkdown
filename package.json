@@ -11,7 +11,7 @@
     "markdown-it": "^10.0.0",
     "markdown-it-table-of-contents": "^0.4.4",
     "mathjax": "3",
-    "mermaid": "^8.5.0",
+    "mermaid": "^9.1.2",
     "monaco-editor": "^0.20.0",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
